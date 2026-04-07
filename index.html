@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e8f0e8" />
+    <title>Today — Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#task-items">Skip to task list</a>
+
+    <div class="app-shell">
+      <div class="dashboard" id="dashboard">
+        <span class="pro-badge" aria-hidden="true">Pro</span>
+
+        <aside class="col col-nav" aria-label="Sidebar navigation">
+          <div class="nav-top">
+            <div class="nav-header">
+              <span class="nav-title" id="sidebar-title">Menu</span>
+              <button
+                type="button"
+                class="icon-btn menu-toggle"
+                id="menu-toggle"
+                aria-expanded="true"
+                aria-controls="sidebar-collapsible"
+                aria-label="Collapse menu"
+              >
+                <i class="fa-solid fa-bars icon-menu-open" aria-hidden="true"></i>
+                <i class="fa-solid fa-xmark icon-menu-close" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="search-wrap">
+              <label class="visually-hidden" for="nav-search">Search tasks</label>
+              <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+              <input
+                type="search"
+                id="nav-search"
+                class="search-input"
+                placeholder="Search"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+
+          <div class="nav-collapsible" id="sidebar-collapsible">
+          <nav class="nav-body" id="nav-body" aria-label="Views and filters"></nav>
+
+          <div class="nav-footer">
+            <a href="#" class="footer-link"
+              ><i class="fa-solid fa-gear" aria-hidden="true"></i> Settings</a
+            >
+            <a href="#" class="footer-link"
+              ><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Sign out</a
+            >
+          </div>
+          </div>
+        </aside>
+
+        <main class="col col-main">
+          <header class="main-header">
+            <h1 class="main-title">
+              <span class="main-title-text" id="main-title-text">Today</span>
+              <span class="title-count" id="title-count">0</span>
+            </h1>
+          </header>
+
+          <button type="button" class="add-task-row" id="btn-add-task">
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+            <span>Add New Task</span>
+          </button>
+
+          <ul class="task-list" id="task-items" aria-label="Tasks for today"></ul>
+        </main>
+
+        <aside class="col col-detail" aria-label="Task details">
+          <div class="detail-scroll">
+            <p class="detail-hint" id="detail-hint" role="status" hidden></p>
+
+            <div class="field-group">
+              <label class="field-label" for="task-name">Task:</label>
+              <input type="text" id="task-name" class="field-input" autocomplete="off" />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="task-desc">Description</label>
+              <textarea
+                id="task-desc"
+                class="field-textarea"
+                rows="4"
+                placeholder="Add notes..."
+              ></textarea>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="task-list-select">List</label>
+              <div class="select-wrap">
+                <select id="task-list-select" class="field-select"></select>
+                <i class="fa-solid fa-chevron-down select-chevron" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="task-due">Due date</label>
+              <div class="date-wrap">
+                <input
+                  type="text"
+                  id="task-due"
+                  class="field-input"
+                  placeholder="e.g. Tomorrow"
+                  autocomplete="off"
+                />
+                <i class="fa-regular fa-calendar date-icon" aria-hidden="true"></i>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label" id="tags-label">Tags</span>
+              <div class="detail-tags" id="detail-tags-wrap" aria-labelledby="tags-label">
+                <div class="detail-tags-pills" id="detail-tags-pills"></div>
+                <div class="tag-composer">
+                  <input
+                    type="text"
+                    id="tag-input"
+                    class="field-input composer-input"
+                    placeholder="New tag…"
+                    aria-label="New tag name"
+                    autocomplete="off"
+                  />
+                  <button type="button" class="btn-composer-add" id="tag-add-commit" aria-label="Add tag">
+                    <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group subtasks-block">
+              <span class="field-label" id="subtasks-label">Subtasks</span>
+              <ul
+                class="subtask-list"
+                id="subtask-list"
+                role="list"
+                aria-labelledby="subtasks-label"
+              ></ul>
+              <div class="subtask-composer">
+                <input
+                  type="text"
+                  id="subtask-input"
+                  class="field-input composer-input"
+                  placeholder="Add a subtask…"
+                  aria-label="New subtask"
+                  autocomplete="off"
+                />
+                <button
+                  type="button"
+                  class="btn-composer-add"
+                  id="subtask-add-commit"
+                  aria-label="Add subtask"
+                >
+                  <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <p class="unsaved-hint" id="unsaved-hint" hidden aria-live="polite">
+              Unsaved changes
+            </p>
+            <div class="detail-actions-row">
+              <button type="button" class="btn btn-ghost" id="btn-delete-task">Delete Task</button>
+              <button type="button" class="btn btn-primary" id="btn-save">Save changes</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="list-modal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="list-modal-title"
+    >
+      <div class="modal-card">
+        <h2 class="modal-title" id="list-modal-title">New list</h2>
+        <div class="field-group">
+          <label class="field-label" for="list-modal-name">Name</label>
+          <input type="text" id="list-modal-name" class="field-input" placeholder="e.g. Errands" autocomplete="off" />
+        </div>
+        <fieldset class="list-color-fieldset">
+          <legend class="field-label">Color</legend>
+          <div class="list-color-options" id="list-color-options"></div>
+        </fieldset>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="list-modal-cancel">Cancel</button>
+          <button type="button" class="btn btn-primary" id="list-modal-save">Create list</button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="delete-modal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="delete-modal-title"
+    >
+      <div class="modal-card">
+        <h2 class="modal-title" id="delete-modal-title">Delete this task?</h2>
+        <p class="modal-body" id="delete-modal-body"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="delete-modal-cancel">Cancel</button>
+          <button type="button" class="btn btn-danger" id="delete-modal-confirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
